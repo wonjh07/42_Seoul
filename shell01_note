@@ -1,0 +1,121 @@
+#ex01. print_groups
+
+
+
+#ex02. find_sh
+
+" find . -type f -name '*.sh' "
+명령을 실행하면 './ex01/print_groups.sh' 다음과같은 결과를 출력
+
+" -execdir command {} ';' " 를 통해서 command 로 {} 이하 이름을 인용해줌
+
+'basename {} 확장자' {}를 인수로 받아 파일 경로를 제거하고 확장자를 삭제하게됨
+
+
+
+
+#ex03. count_file.sh
+
+'find . -type f -o -type d'
+
+현재 그리고 하위 디렉토리에서 파일과 디렉토리 서치
+
+'wc -l'
+
+줄바꿈 카운트
+
+" sed 's/ //g' "
+
+출력되는 텍스트의 공백을 삭제
+
+
+
+
+#ex04. MAC.sh
+
+' ifconfig | grep "ether" '
+
+ifconfig 에서 ether를 포함하는 행을 출력
+
+" awk '{print $2}' "
+
+텍스트내 2번째 필드 값 출력
+
+
+
+
+#ex05. Can you creat it ?
+
+' \"\\\?\$\*\'MaRViN\'\*\$\?\\\" '
+
+\ 역슬래시 이후에 특수문자는 일반문자로 취급
+
+파일 이름 변경전에 미리 내용을 42로 설정하기
+
+chmod, sudo chown 명령어로 허가권,소유자:소유 그룹 변경
+
+touch -t 명령어로 생성시간 변경하기
+
+
+
+
+#ex06. skip
+
+" awk '(NR%2==0)' "
+
+첫째줄 부터 한줄마다 삭제
+
+
+
+
+#ex07. r_dwssap
+
+at /etc/passwd | grep -v "#" | awk "NR >= 2" | cut -f 1 -d : | rev | sort -r | 
+sed -n "$FT_LINE1,$FT_LINE2 p" | tr '\n' ',' | sed 's:,:, :g' | sed 's:, $:.:' | tr -d '\n'
+
+cat /etc/passwd | grep -v "#" | # 명령어의 출력 결과에서 주석은 삭제하고
+
+awk "NR >= 2" # 첫행을 건너뜀
+
+# sed -n 'n;p' | #첫행을 건너뜀 -n 조건이외에 모든 출력을 억제 
+# n;p -> 아무것도인쇄하지않고 다음줄로이동;현재줄을 인쇄
+# ; is seperator
+
+cut -f 1 -d : | # 로그인 아이디만 잘라내기 -> tab 1 필드단위를 제외하고 삭제 -f ~ -d
+# : -> 파일 받아오기
+
+rev | #한행의 내용을 거꾸로출력 '각로그인들 거꾸로 반전시키고'
+
+sort -r | #알파벳 역순으로 정렬
+
+sed -n "$FT_LINE1,$FT_LINE2 p" | # $FT_LINE1,$FT_LINE2 을 포함한 값만 출력
+
+# $FT_LINE1,$FT_LINE2 변수 설정 필수! 예시(7,15행)
+
+tr '\n' ',' | # 줄바꿈을 쉼표로 변환
+
+sed 's:,:, :g' | # 각행의 쉼표뒤에 공백을 추가
+
+sed 's:, $:.:' | # 마지막 행에는 쉼표공백 대신에 마침표 추가
+
+tr -d '\n' # 줄바꿈 삭제
+
+
+
+
+#ex08. add_chelou
+
+echo $FT_NBR1 + $FT_NBR2 | 
+#입력 변수
+
+sed "s/\'/0/g" | sed 's/\\/1/g' | sed 's/\"/2/g' | sed 's/?/3/g' | sed 's/!/4/g' | 
+# $FT_NBR1 숫자 변환
+
+tr "mrdoc" "01234" | 
+# $FT_NBR2 숫자 변환
+
+xargs echo "ibase=5; obase=23;" | bc | 
+# 5진수에서 13진수로 바꿔주려면 13을 5진수로 나타낸 23을 입력해줘야함
+
+tr '0123456789ABC' 'gtaio luSnemf'
+# 13진수 코드를 문자로 변환
