@@ -7,7 +7,7 @@
 " find . -type f -name '*.sh' "
 명령을 실행하면 './ex01/print_groups.sh' 다음과같은 결과를 출력
 
-" -execdir command {} ';' " 를 통해서 command 로 {} 이하 이름을 인용해줌
+" -exec command {} ';' " 를 통해서 command 로 {} 이하 이름을 인용해줌
 
 'basename {} 확장자' {}를 인수로 받아 파일 경로를 제거하고 확장자를 삭제하게됨
 
@@ -70,7 +70,7 @@ touch -t 명령어로 생성시간 변경하기
 
 #ex07. r_dwssap
 
-at /etc/passwd | grep -v "#" | awk "NR >= 2" | cut -f 1 -d : | rev | sort -r | 
+at /etc/passwd | grep -v "^#" | awk "NR >= 2" | cut -f 1 -d : | rev | sort -r | 
 sed -n "$FT_LINE1,$FT_LINE2 p" | tr '\n' ',' | sed 's:,:, :g' | sed 's:, $:.:' | tr -d '\n'
 
 cat /etc/passwd | grep -v "#" | # 명령어의 출력 결과에서 주석은 삭제하고
@@ -88,7 +88,7 @@ rev | #한행의 내용을 거꾸로출력 '각로그인들 거꾸로 반전시�
 
 sort -r | #알파벳 역순으로 정렬
 
-sed -n "$FT_LINE1,$FT_LINE2 p" | # $FT_LINE1,$FT_LINE2 을 포함한 값만 출력
+sed -n "$FT_LINE1,$FT_LINE2 p" | # $FT_LINE1,$FT_LINE2 을 포함한 값만 출력 ""랑 '' 구분하기
 
 # $FT_LINE1,$FT_LINE2 변수 설정 필수! 예시(7,15행)
 
