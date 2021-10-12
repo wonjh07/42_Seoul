@@ -6,15 +6,15 @@
 /*   By: jaewon <jaewon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 17:13:35 by jaewon            #+#    #+#             */
-/*   Updated: 2021/10/10 18:24:05 by jaewon           ###   ########seoul.kr  */
+/*   Updated: 2021/10/11 01:42:56 by jaewon           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putchar(char a)
+void	ft_putchar(char c)
 {
-	write(1, &a, 1);
+	write(1, &c, 1);
 }
 
 void	ft_putnbr(int nb)
