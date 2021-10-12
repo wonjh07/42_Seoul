@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_print_combn.c                                   :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaewon <jaewon@student.42seoul.kr>         +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/11 01:43:16 by jaewon            #+#    #+#             */
-/*   Updated: 2021/10/12 16:27:48 by jaewon           ###   ########seoul.kr  */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <unistd.h>
 
 void	ft_putchar(char a)
@@ -78,10 +66,4 @@ void	ft_print_combn(int nb)
 	}
 	in = 0;
 	ft_combn(data, in, nb);
-}
-
-int	main(void)
-{
-	ft_print_combn(3);
-	return (0);
 }
