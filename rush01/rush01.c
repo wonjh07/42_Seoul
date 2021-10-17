@@ -2,18 +2,18 @@
 #include <unistd.h>
 #include <stdio.h>
 
-int	main(void)
+int	main(int ac, char *av[])
 {
-	char	**m = malloc(sizeof(char *) * 6);
+	int		**m;
 	int		i;
 	int		j;
 	int		d;
-	char	*a = "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2";
 
+	*m = malloc(sizeof(int *) * 6);
 	i = 0;
 	while (i < 6)
 	{
-		m[i] = malloc(sizeof(char) * 6);
+		m[i] = malloc(sizeof(int) * 6);
 		i++;
 	}
 	i = 0;
@@ -23,8 +23,8 @@ int	main(void)
 		j = 1;
 		while (j <= 4)
 		{
-			m[i][j] = a[d];
-			m[j][i] = a[d + 16];
+			m[i][j] = *av[d];
+			m[j][i] = *av[d + 16];
 			j ++;
 			d += 2;
 		}

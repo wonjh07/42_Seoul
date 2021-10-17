@@ -1,76 +1,97 @@
 #include <unistd.h>
 
-#define MAX_PAGE_SIZE 14
-
-void	ft_buffer_number(int number, int radix, int buffer[], int index)
+void	ft_putchar(char c, int size)
 {
-	if (number > radix - 1)
-		ft_buffer_number(number / radix, radix, buffer, index + 1);
-	buffer[index] = number % radix;
-}
+	int	i;
 
-void	ft_write_hex(unsigned int number, int radix, int char_count)
-{
-	int	buffer[MAX_PAGE_SIZE + 1];
-	int	index;
-
-	index = -1;
-	while (index++ < MAX_PAGE_SIZE)
-		buffer[index] = 0;
-	ft_buffer_number(number, radix, buffer, 0);
-	index = -1;
-	while (index++ < char_count)
-		write(1, &"0123456789abcdefgh"[buffer[char_count - index]], 1);
-}
-
-void	ft_write_safe_char(char *c)
-{
-	if (*c >= ' ' && *c != 127)
-		write(1, c, 1);
-	else
-		write(1, &".", 1);
-}
-
-void	ft_print_memory_at(void *start_addr, unsigned int size, char *curr_addr)
-{
-	int	index;
-
-	ft_write_hex((unsigned int)curr_addr, 16, MAX_PAGE_SIZE);
-	write(1, &": ", 2);
-	index = 0;
-	while (index++ < 16)
+	i = 0;
+	while (i < size)
 	{
-		if (start_addr + size <= (void *)(curr_addr + index - 1))
-			write(1, &"  ", 2);
-		else
-			ft_write_hex((unsigned char)*(curr_addr + index - 1), 16, 1);
-		if (index % 2 == 0)
-			write(1, &" ", 1);
+		write(1, &c, 1);
+		i++;
 	}
-	index = 0;
-	while (index++ < 16)
-		if (start_addr + size > (void *)(curr_addr + index - 1))
-			ft_write_safe_char((char *)curr_addr + index - 1);
+}
+
+void	ft_get_hex(unsigned long long nb, int prev)
+{
+	char	*hexabase;
+
+	hexabase = "0123456789abcdef";
+	if (nb < 16 && prev == 1)
+		ft_putchar('0', 1);
+	if (nb >= 16)
+	{
+		ft_get_hex(nb / 16, 0);
+		ft_get_hex(nb % 16, 0);
+	}
+	else
+	{
+		ft_putchar(hexabase[nb], 1);
+	}
+}
+
+void	ft_print_addr(unsigned long long addr)
+{
+	unsigned long long	tmp;
+	int					i;
+
+	tmp = addr;
+	i = 1;
+	while (i++ < 16)
+	{
+		if (tmp < 16)
+			ft_putchar('0', 1);
+		tmp /= 16;
+	}
+	ft_get_hex(addr, 0);
+}
+
+void	ft_print_data(unsigned char *c, int size)
+{
+	int		i;
+
+	i = -1;
+	while (i++ < 16)
+	{
+		if (i % 2 == 0)
+			ft_putchar(' ', 1);
+		if (i < size)
+			ft_get_hex((unsigned long long)*(c + i), 1);
+		else if (i != 16)
+		{
+			ft_putchar(' ', 16 - i);
+			break ;
+		}
+	}
+	i = -1;
+	while (i++ < size - 1)
+	{
+		if (*(c + i) <= 31 || *(c + i) >= 127)
+			ft_putchar('.', 1);
+		else
+			ft_putchar(*(c + i), 1);
+	}
 }
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
-	char	*curr_addr;
+	unsigned int	i;
+	unsigned char	*c;
+	unsigned int	maxsize;
 
-	curr_addr = (char *)addr;
-	while ((void *)curr_addr < (addr + size))
+	i = 0;
+	c = addr;
+	while (i * 16 < size)
 	{
-		ft_print_memory_at(addr, size, curr_addr);
-		write(1, &"\n", 1);
-		curr_addr += 16;
+		if (i < size / 16)
+			maxsize = 16;
+		else
+			maxsize = size % 16;
+		ft_print_addr((unsigned long long)c + (i * 16));
+		ft_putchar(':', 1);
+		ft_print_data(c + (i * 16), maxsize);
+		ft_putchar('\n', 1);
+		i++;
 	}
 	return (addr);
-}
-
-int	main(void)
-{
-	char	*string;
-
-	string = "Bonjour les aminches\t\n\tc est fou.tout.ce qu on peut faire avec...print_memory....lol.lol. ";
-	ft_print_memory(string, 92);
 }
