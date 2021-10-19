@@ -1,17 +1,17 @@
 char	*ft_strncat(char *dest, char *src, unsigned int nb)
 {
-	unsigned int	c;
-	unsigned int	d;
+	unsigned int	i;
+	unsigned int	j;
 
-	c = 0;
-	d = 0;
-	while (dest[c] != '\0')
-		c++;
-	while (src[d] != '\0' && d < nb)
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && j < nb)
 	{
-		dest[c + d] = src[d];
-		d++;
+		dest[i + j] = src[j];
+		j++;
 	}
-	dest[c + d] = '\0';
+	dest[i + j] = '\0';
 	return (dest);
 }

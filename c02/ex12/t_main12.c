@@ -1,9 +1,19 @@
+unsigned int	ft_strlen(char *str)
+{
+	unsigned int	counter;
+
+	counter = 0;
+	while (str[counter] != '\0')
+		counter++;
+	return (counter);
+}
+
 void	*ft_print_memory(void *addr, unsigned int size);
 
 int	main(void)
 {
-	char	*string;
+	char		*string;
 
-	string = "Bonjour les aminches\t\n\tc  est fou\ttout\tce qu on peut faire avec\t\n\tprint_memory\n\n\n\tlol.lol\n ";
-	ft_print_memory(string, 92);
+	string = "Bonjour les ami";
+	ft_print_memory(string, ft_strlen(string));
 }

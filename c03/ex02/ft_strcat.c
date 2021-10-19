@@ -1,40 +1,15 @@
-#include <stdio.h>
-
-int	ft_strlen(char *str)
-{
-	int	counter;
-
-	counter = 0;
-	while (*str != '\0')
-	{
-		counter++;
-		str++;
-	}
-	return (counter);
-}
-
 char	*ft_strcat(char *dest, char *src)
 {
-	int	c;
+	int	i;
 
-	c = ft_strlen(dest);
+	while (dest[i] != '\0')
+		i++;
 	while (*src != '\0')
 	{
-		dest[c] = *src;
-		c++;
+		dest[i] = *src;
+		i++;
 		src++;
 	}
-	dest[c] = '\0';
+	dest[i] = '\0';
 	return (dest);
-}
-
-int	main(void)
-{
-	char dest[20] = "Hello";
-	char src[] = ", world!";
-
-	printf("-----\ndest = %s\nsrc = %s\n", dest, src);
-	ft_strcat(dest, src);
-	printf("result = %s\n-----\n", dest);
-	return (0);
 }
