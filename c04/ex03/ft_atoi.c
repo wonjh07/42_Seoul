@@ -9,6 +9,7 @@ int	ft_atoi(char *str)
 	result = 0;
 	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
+
 	while (str[i] == '+' || str[i] == '-')
 	{
 		if (str[i] == '-')

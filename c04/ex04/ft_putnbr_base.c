@@ -25,7 +25,7 @@ int	base_check(char *base, int l)
 	i = 0;
 	while (i < l - 1)
 	{
-		if ((tmp[i] >= '*' && tmp[i] <= '/' || tmp[i] == '=')
+		if ((tmp[i] != '+' && tmp[i] != '-')
 			|| (tmp[i] < '!' || tmp[i] > '~'))
 			return (0);
 		j = i + 1;
