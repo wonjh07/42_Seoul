@@ -4,16 +4,20 @@
 
 int	main(void)
 {
-	int number;
+	int	number;
+	int	c;
 
-	number = -2;
-	while (number < 26)
+	c = 0;
+	number = -4800;
+	while (c < 2000)
 	{
 		printf("sqrt(%d) = %d\n", number, ft_sqrt(number));
 		number++;
+		c++;
 	}
 	printf("sqrt(%d) = %d\n", 1000000, ft_sqrt(1000000));
 	printf("sqrt(%d) = %d\n", INT_MAX, ft_sqrt(INT_MAX));
 	printf("sqrt(%d) = %d\n", INT_MIN, ft_sqrt(INT_MIN));
 	printf("sqrt(%d) = %d\n", 2147395600, ft_sqrt(2147395600));
+	printf("sqrt(%d) = %d\n", 2147483640, ft_sqrt(2147483640));
 }
