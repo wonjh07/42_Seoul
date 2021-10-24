@@ -3,7 +3,8 @@
 		"unistd.h": "c",
 		"stdio.h": "c",
 		"random": "c",
-		"sstream": "c"
+		"sstream": "c",
+		"stdlib.h": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

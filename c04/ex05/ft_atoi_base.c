@@ -46,7 +46,7 @@ int	ft_atoi_test(char str, char *base)
 			return (num);
 		num++;
 	}
-	return (-1);
+	return (0);
 }
 
 long	ft_atoi(char *str, int length, char *base)
@@ -54,6 +54,7 @@ long	ft_atoi(char *str, int length, char *base)
 	int		i;
 	int		negative;
 	int		result;
+	int		tmp;
 	long	*st;
 
 	i = 0;
@@ -67,10 +68,12 @@ long	ft_atoi(char *str, int length, char *base)
 			negative *= -1;
 		i++;
 	}
-	while (ft_atoi_test(str[i], base) != -1)
+	tmp = ft_atoi_test(str[i], base);
+	while (tmp != 0)
 	{
-		result = (result * length) + (ft_atoi_test(str[i], base));
+		result = (result * length) + (tmp);
 		i++;
+		tmp = ft_atoi_test(str[i], base);
 	}
 	return (result * negative);
 }
@@ -80,9 +83,14 @@ int	ft_atoi_base(char *str, char *base)
 	int		length;
 	long	st;
 
+	if (base_check(base, length) == 0)
+		return (0);
+	printf("ok");
 	length = ft_strlen(base);
+	printf("ok");
 	st = ft_atoi(str, length, base);
-	if ((base[0] != '\0' || base[1] != '\0') && base_check(base, length))
+	printf("ok");
+	if (base[0] != '\0' || base[1] != '\0')
 		return (st);
 	return (0);
 }

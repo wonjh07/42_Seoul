@@ -1,10 +1,5 @@
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 int	ft_strlen(char *str)
 {
 	int	c;
@@ -43,22 +38,22 @@ int	base_check(char *base, int l)
 void	ft_putnbr_base(int nbr, char *base)
 {
 	int		length;
-	long	nb;
+	int		nb;
 
 	nb = nbr;
 	length = ft_strlen(base);
 	if (base[0] == '\0' || base[1] == '\0')
-		ft_putchar('\0');
-	else if (base_check(base, length))
+		write(1, "\0", 1);
+	else if (base_check(base, length) == 1)
 	{
 		if (nb < 0)
 		{
-			ft_putchar('-');
+			write(1, "-", 1);
 			nb *= -1;
 		}
-		if (nb < length)
-			ft_putchar(base[nb]);
-		if (nb >= length)
+		else if (nb < length)
+			write(1, &base[nb], 1);
+		else if (nb >= length)
 		{
 			ft_putnbr_base(nb / length, base);
 			ft_putnbr_base(nb % length, base);

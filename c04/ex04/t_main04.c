@@ -1,6 +1,9 @@
+#include "ft_putnbr_base.c"
+
 void	ft_putnbr_base(int nbr, char *base);
 
 int	main(void)
 {
-	ft_putnbr_base(-2234, "ab");
+	ft_putnbr_base(-2234, "01234567");
+	return (0);
 }
