@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 int	ft_strlen(char *str)
 {
 	int	c;
@@ -14,19 +12,18 @@ int	base_check(char *base, int l)
 {
 	int		i;
 	int		j;
-	char	*tmp;
 
-	tmp = base;
+	if (l < 2)
+		return (0);
 	i = 0;
 	while (i < l - 1)
 	{
-		if ((tmp[i] != '+' && tmp[i] != '-')
-			|| (tmp[i] < '!' || tmp[i] > '~'))
+		if (base[i] == '+' || base[i] == '-' || base[i] < '!' || base[i] > '~')
 			return (0);
 		j = i + 1;
 		while (j < l)
 		{
-			if (tmp[i] == tmp[j])
+			if (base[i] == base[j])
 				return (0);
 			j++;
 		}
@@ -49,13 +46,12 @@ int	ft_atoi_test(char str, char *base)
 	return (0);
 }
 
-long	ft_atoi(char *str, int length, char *base)
+int	ft_atoi(char *str, int length, char *base)
 {
 	int		i;
 	int		negative;
 	int		result;
 	int		tmp;
-	long	*st;
 
 	i = 0;
 	negative = 1;
@@ -68,12 +64,11 @@ long	ft_atoi(char *str, int length, char *base)
 			negative *= -1;
 		i++;
 	}
-	tmp = ft_atoi_test(str[i], base);
-	while (tmp != 0)
+	while (str[i] != '\0')
 	{
+		tmp = ft_atoi_test(str[i], base);
 		result = (result * length) + (tmp);
 		i++;
-		tmp = ft_atoi_test(str[i], base);
 	}
 	return (result * negative);
 }
@@ -81,16 +76,10 @@ long	ft_atoi(char *str, int length, char *base)
 int	ft_atoi_base(char *str, char *base)
 {
 	int		length;
-	long	st;
+	int		st;
 
-	if (base_check(base, length) == 0)
-		return (0);
-	printf("ok");
 	length = ft_strlen(base);
-	printf("ok");
-	st = ft_atoi(str, length, base);
-	printf("ok");
-	if (base[0] != '\0' || base[1] != '\0')
-		return (st);
-	return (0);
+	if (base_check(base, length))
+		st = ft_atoi(str, length, base);
+	return (st);
 }

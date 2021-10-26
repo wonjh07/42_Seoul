@@ -1,4 +1,7 @@
 #include <unistd.h>
+#include <stdlib.h>
+
+int	g_c = 0;
 
 int	ft_strlen(char *str)
 {
@@ -34,31 +37,37 @@ int	base_check(char *base, int l)
 	return (1);
 }
 
-int	convert(int nbr, char *base, int l)
+char	convert(int nbr, char *base, int l, char *result)
 {
 	if (nbr < 0)
 	{
-		write(1, "-", 1);
+		result[g_c] = '-';
+		g_c++;
 		nbr *= -1;
-		convert(nbr, base, l);
+		convert(nbr, base, l, result);
 		return (0);
 	}
 	if (nbr >= l)
 	{
-		convert(nbr / l, base, l);
-		convert(nbr % l, base, l);
-		return (0);
+		convert(nbr / l, base, l, result);
+		convert(nbr % l, base, l, result);
 	}
-	write(1, &(base[nbr]), 1);
+	if (nbr < l)
+	{
+		result[g_c] = base[nbr];
+		g_c++;
+	}
 	return (0);
 }
 
-void	ft_putnbr_base(int nbr, char *base)
+char	*ft_putnbr_base(int nbr, char *base)
 {
 	int		length;
+	char	*result;
 
 	length = ft_strlen(base);
+	result = malloc(sizeof(char) * (length + 1));
 	if (base_check(base, length))
-		convert(nbr, base, length);
-	write(1, "\n", 1);
+		convert(nbr, base, length, result);
+	return (result);
 }

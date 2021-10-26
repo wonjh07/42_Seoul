@@ -15,14 +15,8 @@ int	main(void)
 	strs[2] = "poi";
 	strs[3] = "456";
 	strs[4] = "erb";
-	separator = "::";
+	separator = ":haha:";
 	index = 0;
-	printf("=====REAL ANSWER=====\n");
-	printf("result with size = 0 : $$\n");
-	printf("result with size = 1 : $lol$\n");
-	printf("result with size = 2 : $lol1234$\n");
-	printf("result with size = 3 : $lol1234poiuic$\n");
-	printf("=====YOUR ANSWER=====\n");
 	while (index < 6)
 	{
 		result = ft_strjoin(index, strs, separator);

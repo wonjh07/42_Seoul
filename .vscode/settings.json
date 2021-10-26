@@ -4,7 +4,11 @@
 		"stdio.h": "c",
 		"random": "c",
 		"sstream": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"ostream": "c",
+		"*.tcc": "c",
+		"__locale": "c",
+		"functional": "c"
 	},
 	"C_Cpp.errorSquiggles": "Disabled"
 }

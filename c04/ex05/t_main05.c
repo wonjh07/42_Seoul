@@ -10,4 +10,5 @@ int	main(void)
 	printf("%d\n", ft_atoi_base("-1e240", "0123456789abcdef"));
 	printf("%d\n", ft_atoi_base("-12422311", "01234"));
 	printf("%d\n", ft_atoi_base("-hiid", "0123456789abcdefghi"));
+	return (0);
 }
